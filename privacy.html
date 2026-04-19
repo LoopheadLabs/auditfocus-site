@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy | AuditFocus</title>
+  <meta name="description" content="AuditFocus stores all scan history, branding, and AI inference locally. No servers, no analytics, no telemetry.">
+  <meta name="theme-color" content="#0a4d68">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a4d68'/%3E%3Cpath d='M18 34l10 10 18-22' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --line: #e2e8f0;
+      --accent: #0a4d68;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: #eef2f6;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.92em;
+    }
+
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+    .brand-mark {
+      width: 26px; height: 26px; border-radius: 7px;
+      background: var(--accent);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 12px;
+    }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--ink-soft); }
+    .nav-links a { color: var(--ink-soft); }
+
+    article {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 44px 48px;
+      margin: 40px auto;
+    }
+    article h1 {
+      font-size: 32px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .meta {
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    article h2 {
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      margin: 36px 0 12px;
+    }
+    article p, article li {
+      color: var(--ink);
+      font-size: 15.5px;
+    }
+    article ul {
+      padding-left: 22px;
+    }
+    article li {
+      margin: 6px 0;
+    }
+    article strong { font-weight: 600; }
+    .callout {
+      background: rgba(10, 77, 104, 0.06);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin: 18px 0;
+      font-size: 15.5px;
+    }
+
+    footer {
+      padding: 24px 0 56px;
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      text-align: center;
+    }
+    footer a { color: var(--ink-soft); }
+
+    @media (max-width: 600px) {
+      article { padding: 28px 22px; margin: 24px auto; border-radius: 0; border-left: 0; border-right: 0; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">
+      <span class="brand-mark">A</span>
+      <span>AuditFocus</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/#features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/setup.html">Chrome AI setup</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <article>
+    <h1>AuditFocus Privacy Policy</h1>
+    <div class="meta">
+      <strong>Effective Date:</strong> April 2026 &nbsp;·&nbsp;
+      <strong>Publisher:</strong> Loophead Labs LLC
+    </div>
+
+    <p>This Privacy Policy applies to the AuditFocus browser extension ("AuditFocus", "the extension") published by Loophead Labs LLC ("we", "us", or "our"). It is consistent with the general Loophead Labs privacy policy; this page covers the extension-specific details that the Chrome Web Store requires publishers to disclose.</p>
+
+    <p>We are committed to protecting your privacy. This policy explains what data the extension accesses, how it is used, and your rights regarding that data.</p>
+
+    <h2>1. What AuditFocus Does</h2>
+    <p>AuditFocus is a developer tool that scans the current webpage against the WCAG 2.1 A and AA accessibility rule set using the open-source axe-core engine (Deque Systems, MPL 2.0). Results are displayed in Chrome's side panel. Its paid tiers add on-device AI fix suggestions, AI-generated alt text for image violations, PDF and Markdown report export, CSV export for issue trackers, branded report covers, scan history, and project tagging.</p>
+
+    <h2>2. Data We Collect</h2>
+    <div class="callout"><strong>We do not operate any servers and we do not collect, transmit, or store any of your personal data on remote systems.</strong></div>
+
+    <p>Everything AuditFocus needs to function is stored locally in your browser using Chrome's built-in <code>storage.local</code> and IndexedDB APIs. This includes:</p>
+    <ul>
+      <li>Your extension preferences (such as which tier is active, whether the upgrade banner has been dismissed, UI filters, and dev-only overrides).</li>
+      <li>On the paid tiers only: a local scan history log (up to 100 entries) containing the scanned URL, timestamp, violation counts by severity, and any project tags you applied. Each entry also stores the structured axe-core result used to regenerate a report. This log never leaves your device.</li>
+      <li>On the Agency tier only: your branding settings, specifically the company name, accent color, and an uploaded logo (stored as a data URL up to 500 KB). This data is kept in <code>chrome.storage.local</code> and is used solely to render the cover page of exported PDF reports.</li>
+    </ul>
+
+    <p>We do not collect or transmit:</p>
+    <ul>
+      <li>Your name, email address, or any account identifier tied to you personally.</li>
+      <li>The content, structure, or screenshots of the pages you scan. Scans are performed locally and the results remain on your device unless you choose to export and share a report yourself.</li>
+      <li>Your browsing history, cookies, or session tokens.</li>
+      <li>Microphone, camera, location, or any OS-level data. AuditFocus does not request access to any of these.</li>
+      <li>Analytics, telemetry, crash reports, or usage metrics.</li>
+    </ul>
+
+    <h2>3. Permissions</h2>
+    <p>AuditFocus requests the following Chrome permissions, and uses each only for the stated purpose:</p>
+    <ul>
+      <li><strong><code>activeTab</code>:</strong> to run an accessibility scan on the tab you are currently viewing when you click the toolbar icon or the Scan button in the side panel. <code>activeTab</code> grants one-off access at the moment of the user gesture and is the minimum permission required to audit a page.</li>
+      <li><strong><code>scripting</code>:</strong> to inject the bundled axe-core engine into the active tab's main execution world so it can evaluate the DOM against WCAG 2.1 rules. The injected code only reads DOM structure, styles, and ARIA attributes; it does not transmit anything.</li>
+      <li><strong><code>sidePanel</code>:</strong> to render the AuditFocus user interface in Chrome's side panel.</li>
+      <li><strong><code>storage</code>:</strong> to save your local scan history, project tags, tier status, UI preferences, and (on the Agency tier) your branding settings.</li>
+      <li><strong><code>tabs</code>:</strong> to capture the URL and title of the tab you are auditing so they can be shown on exported reports and listed in your local scan history, and so the side panel can clear stale results when the audited tab navigates. Tab content is not read through this permission.</li>
+      <li><strong><code>downloads</code>:</strong> to save PDF, Markdown, and CSV reports to your Downloads folder when you click Export. Downloads are only triggered by your explicit action and only write files the extension has generated locally; no remote files are fetched.</li>
+      <li><strong>Host permission for <code>https://extensionpay.com/*</code>:</strong> to receive the purchase-completed callback from the ExtensionPay library after a user pays for Pro or Agency. A small content script is injected only on extensionpay.com to deliver this callback; no page content is read or transmitted.</li>
+    </ul>
+
+    <h2>4. AI Features</h2>
+    <p>On the Pro and Agency tiers, AuditFocus uses Chrome's built-in Prompt API and the Gemini Nano on-device model to generate:</p>
+    <ul>
+      <li>Plain-English fix suggestions for individual WCAG violations</li>
+      <li>Alt-text proposals for images flagged by the <code>image-alt</code> rule</li>
+    </ul>
+    <p>All AI inference runs locally on your device through Chrome's built-in AI runtime. No element snippets, page content, or generated output is transmitted to any server by AuditFocus. Availability and device support are determined by Chrome (version 138 or later on a supported machine). If the Prompt API is not available, free-tier scanning still works fully and the AI actions show a fallback link to axe-core documentation.</p>
+
+    <h2>5. Third-Party Services</h2>
+    <p>AuditFocus uses a single third-party service, and only on the paid tiers:</p>
+    <ul>
+      <li><strong>ExtensionPay</strong> (operated by Glench, LLC), which uses <strong>Stripe</strong> to process one-time payments. When you click Upgrade, you are redirected to Stripe Checkout. We never see or store your payment card details. ExtensionPay and Stripe handle that data under their own privacy policies, available at <a href="https://extensionpay.com">extensionpay.com</a> and <a href="https://stripe.com/privacy">stripe.com/privacy</a>.</li>
+    </ul>
+    <p>We do not use analytics providers (no Google Analytics, no Firebase, no Mixpanel), advertising networks, or tracking pixels. We do not sell, rent, or share any data with third parties for any purpose.</p>
+
+    <h2>6. Children's Privacy</h2>
+    <p>AuditFocus is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has used the extension in a way that raises concern, please contact us.</p>
+
+    <h2>7. Data Security</h2>
+    <p>Because AuditFocus stores all of its data locally on your device using Chrome's built-in storage and IndexedDB, the security of that data is a function of your device and your Chrome profile. We encourage you to keep your browser and operating system up to date. Payment data is handled entirely by Stripe, which is PCI-DSS certified and uses industry-standard encryption.</p>
+
+    <h2>8. Your Rights and Choices</h2>
+    <p>You can remove all data AuditFocus has stored by:</p>
+    <ul>
+      <li>Clearing scan history from the history view in the side panel, or</li>
+      <li>Uninstalling the extension from <code>chrome://extensions</code>. Uninstalling clears all <code>chrome.storage.local</code> and IndexedDB data written by the extension.</li>
+    </ul>
+    <p>Because we do not operate any servers and hold no personal data, there is nothing further to delete on our end.</p>
+
+    <h2>9. Open Source Attribution</h2>
+    <p>AuditFocus is powered by <a href="https://github.com/dequelabs/axe-core">axe-core</a>, an open-source accessibility testing engine developed by Deque Systems and licensed under the Mozilla Public License 2.0 (MPL 2.0). Attribution is preserved in every generated report, including when the Agency white-label setting is enabled.</p>
+
+    <h2>10. Policy Changes</h2>
+    <p>We may update this Privacy Policy as the extension evolves. Changes will be posted at this URL and reflected by the Effective Date above. Material changes will also be noted in the extension's release notes on the Chrome Web Store.</p>
+
+    <h2>11. Contact</h2>
+    <p>For questions about this Privacy Policy or AuditFocus, please contact: <strong><a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a></strong></p>
+  </article>
+</div>
+
+<footer>
+  © 2026 Loophead Labs LLC &nbsp;·&nbsp; <a href="/">auditfocus.app</a>
+</footer>
+
+</body>
+</html>

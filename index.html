@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AuditFocus: One-click WCAG 2.1 AA audits for any webpage</title>
+  <meta name="description" content="AuditFocus runs WCAG 2.1 AA accessibility audits on any page, with on-device AI fix suggestions and audit-ready PDF, Markdown, and CSV exports. Powered by axe-core and Chrome's built-in Gemini Nano.">
+  <meta name="theme-color" content="#0a4d68">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a4d68'/%3E%3Cpath d='M18 34l10 10 18-22' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+  <meta property="og:title" content="AuditFocus">
+  <meta property="og:description" content="One-click WCAG 2.1 AA audits with on-device AI fixes. Powered by axe-core and Chrome's Gemini Nano.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://auditfocus.app">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --ink-soft: #475569;
+      --line: #e2e8f0;
+      --accent: #0a4d68;
+      --accent-hover: #0d5d7f;
+      --accent-tint: rgba(10, 77, 104, 0.08);
+      --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--ink);
+    }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: var(--accent);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 13px;
+    }
+    .nav-links { display: flex; gap: 22px; font-size: 15px; color: var(--ink-soft); }
+    .nav-links a { color: var(--ink-soft); }
+
+    .hero {
+      padding: 80px 0 56px;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      line-height: 1.08;
+      margin: 0 0 18px;
+      letter-spacing: -0.02em;
+    }
+    .subhead {
+      font-size: clamp(17px, 2vw, 19px);
+      color: var(--ink-soft);
+      max-width: 660px;
+      margin: 0 auto 32px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+    .btn-secondary:hover {
+      border-color: var(--ink-soft);
+      text-decoration: none;
+    }
+    .meta-line {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--ink-soft);
+    }
+
+    .trust {
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .trust-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+    .trust-list {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .trust-list span::before {
+      content: "●";
+      color: var(--accent);
+      margin-right: 8px;
+      font-size: 10px;
+      vertical-align: middle;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+    }
+    .section-head p {
+      margin: 0 auto;
+      color: var(--ink-soft);
+      max-width: 560px;
+    }
+
+    .features {
+      padding: 72px 0;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .feature h3 {
+      margin: 12px 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+    }
+    .feature p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+    .feature-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--accent-tint);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .differentiators {
+      padding: 72px 0;
+      background: var(--surface);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .diff {
+      padding: 8px 0;
+    }
+    .diff .badge {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      background: var(--accent-tint);
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .diff h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+    }
+    .diff p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+
+    .pricing {
+      padding: 72px 0;
+    }
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+    }
+    .tier.pro {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .tier.pro::after {
+      content: "Most popular";
+      position: absolute;
+      top: -11px;
+      right: 18px;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .tier-name {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+    .tier-price {
+      font-size: 30px;
+      font-weight: 700;
+      margin: 6px 0 4px;
+      letter-spacing: -0.02em;
+    }
+    .tier-price small {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+    .tier-tag {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+    .tier ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      flex: 1;
+    }
+    .tier li {
+      padding: 7px 0;
+      font-size: 14.5px;
+      color: var(--ink);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .tier li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .setup-callout {
+      padding: 40px 0 72px;
+    }
+    .setup-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+    .setup-card .copy { flex: 1; min-width: 240px; }
+    .setup-card h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+    }
+    .setup-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+
+    footer {
+      padding: 36px 0 56px;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { color: var(--ink-soft); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 56px 0 40px; }
+      .features, .differentiators, .pricing { padding: 56px 0; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">
+      <span class="brand-mark">A</span>
+      <span>AuditFocus</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="/setup.html">Chrome AI setup</a>
+      <a href="/privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Chrome Extension</span>
+    <h1>WCAG 2.1 AA audits,<br>one click away.</h1>
+    <p class="subhead">
+      AuditFocus scans any webpage against the WCAG 2.1 A and AA rule set, explains each violation in plain English, suggests AI-generated fixes on device, and exports audit-ready PDF, Markdown, and CSV reports.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" rel="noopener">
+        Add to Chrome
+      </a>
+      <a class="btn btn-secondary" href="#features">See how it works</a>
+    </div>
+    <div class="meta-line">Free tier included. Pro $49 one-time. Agency $149 one-time.</div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-label">Built on</div>
+    <div class="trust-list">
+      <span>axe-core 4.10 (Deque, MPL 2.0)</span>
+      <span>Chrome Prompt API</span>
+      <span>Gemini Nano on-device</span>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Everything you need to ship an accessible release</h2>
+      <p>From the first scan to the final audit report, AuditFocus keeps accessibility work in the browser, on your device, and out of your way.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>One-click WCAG 2.1 AA scan</h3>
+        <p>Open the side panel, hit Scan. Results grouped by severity in under a second, with rule ID, help text, and the offending selector for every violation.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔐</div>
+        <h3>Scans what you can see</h3>
+        <p>Runs inside your tab, so logged-in dashboards, staging environments, and internal tools audit just as easily as public pages. No credentials to share, no tunnels to set up.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤖</div>
+        <h3>On-device AI fix suggestions</h3>
+        <p>Pro uses Chrome's built-in Gemini Nano to generate plain-English fixes and ready-to-paste code. Nothing ever leaves your machine.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🖼️</div>
+        <h3>AI alt-text for missing images</h3>
+        <p>For every image flagged by the image-alt rule, AuditFocus proposes contextual alt text you can copy straight into your markup.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📄</div>
+        <h3>Audit-ready reports</h3>
+        <p>Export a branded PDF audit report, a Markdown summary for Linear or GitHub, or a CSV for Jira import. Every report keeps the axe-core attribution your legal team wants.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗂️</div>
+        <h3>Scan history with project tags</h3>
+        <p>Keep the last 100 scans locally, tag each one by client or sprint, and filter history by project so remediation work stays organized across accounts.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <h3>Agency branding</h3>
+        <p>Upload a logo, pick an accent color, set your firm's name. Every PDF cover ships under your brand, with axe-core attribution preserved on an inner page.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h3>Local. Private. Server-free.</h3>
+        <p>No accounts, no telemetry, no servers. Scans, history, branding, and AI inference all run on your device. Uninstall and every byte is gone.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">♿</div>
+        <h3>axe-core under the hood</h3>
+        <p>Same rule engine the pros use. WCAG 2.1 Level A and AA coverage with 90+ rules spanning color contrast, ARIA, forms, landmarks, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="differentiators">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Why AuditFocus beats the alternatives</h2>
+      <p>Accessibility audits usually mean paid SaaS dashboards, API keys, or command-line tools that your designers won't touch. AuditFocus fits into the work you're already doing.</p>
+    </div>
+    <div class="diff-grid">
+      <div class="diff">
+        <div class="badge">Audit authenticated pages</div>
+        <h3>Runs where your product lives</h3>
+        <p>Most accessibility checkers crawl from the cloud and can't reach anything behind a login. AuditFocus runs in your browser, so admin dashboards, customer portals, and SSO-gated staging audit the same as a public landing page.</p>
+      </div>
+      <div class="diff">
+        <div class="badge">On-device AI</div>
+        <h3>No API keys, no data leaving</h3>
+        <p>Fix suggestions and alt text use Chrome's built-in Gemini Nano model. Nothing is sent to OpenAI, Anthropic, or any vendor server. No rate limits, no per-token bill, no compliance review.</p>
+      </div>
+      <div class="diff">
+        <div class="badge">Audit-ready exports</div>
+        <h3>Reports your client will actually accept</h3>
+        <p>PDF cover pages on Agency, Markdown for your ticket tracker, CSV for Jira or Linear import. Every report names the axe-core rule IDs and maps to WCAG success criteria, so legal and procurement sign off.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>One-time pricing. No subscriptions.</h2>
+      <p>Pay once, own the extension forever. Free tier is fully featured for casual scans. Pro and Agency unlock the features teams need.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-name">Free</div>
+        <div class="tier-price">$0</div>
+        <div class="tier-tag">Perfect for occasional audits</div>
+        <ul>
+          <li>Full WCAG 2.1 AA scan engine</li>
+          <li>5 scans per day</li>
+          <li>Markdown report export</li>
+          <li>Violations grouped by severity</li>
+          <li>Runs on logged-in pages</li>
+        </ul>
+      </div>
+      <div class="tier pro">
+        <div class="tier-name">Pro</div>
+        <div class="tier-price">$49 <small>one-time</small></div>
+        <div class="tier-tag">For developers shipping accessible product</div>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Unlimited scans</li>
+          <li>On-device AI fix suggestions</li>
+          <li>AI alt-text for image violations</li>
+          <li>PDF report export</li>
+          <li>CSV export for Jira and Linear</li>
+          <li>Local scan history (100 scans)</li>
+          <li>Project tagging and filters</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Agency</div>
+        <div class="tier-price">$149 <small>one-time</small></div>
+        <div class="tier-tag">For consultancies delivering audits to clients</div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Branded PDF cover pages</li>
+          <li>Custom logo, name, and accent color</li>
+          <li>Deliver reports under your brand</li>
+          <li>axe-core attribution preserved</li>
+          <li>Use across unlimited clients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="setup-callout">
+  <div class="wrap">
+    <div class="setup-card">
+      <div class="copy">
+        <h3>Need to turn on Chrome's built-in AI first?</h3>
+        <p>AI fix suggestions and alt-text need Chrome 138 or later with the Prompt API enabled and the Gemini Nano model downloaded. It takes about three minutes.</p>
+      </div>
+      <a class="btn btn-primary" href="/setup.html">Chrome AI setup guide</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>© 2026 Loophead Labs LLC</div>
+    <div class="footer-links">
+      <a href="/setup.html">Chrome AI setup</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="mailto:dev@loopheadlabs.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
