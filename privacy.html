@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy | AuditFocus</title>
-  <meta name="description" content="AuditFocus stores all scan history, branding, and AI inference locally. No servers, no analytics, no telemetry.">
+  <meta name="description" content="AuditFocus stores all scan history, branding, and AI inference locally on your device. The extension uses no analytics or telemetry. Full disclosure of website analytics is included.">
   <meta name="theme-color" content="#0a4d68">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a4d68'/%3E%3Cpath d='M18 34l10 10 18-22' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 
@@ -146,7 +146,7 @@
   <article>
     <h1>AuditFocus Privacy Policy</h1>
     <div class="meta">
-      <strong>Effective Date:</strong> April 2026 &nbsp;·&nbsp;
+      <strong>Effective Date:</strong> April 21, 2026 &nbsp;·&nbsp;
       <strong>Publisher:</strong> Loophead Labs LLC
     </div>
 
@@ -201,7 +201,7 @@
     <ul>
       <li><strong>ExtensionPay</strong> (operated by Glench, LLC), which uses <strong>Stripe</strong> to process one-time payments. When you click Upgrade, you are redirected to Stripe Checkout. We never see or store your payment card details. ExtensionPay and Stripe handle that data under their own privacy policies, available at <a href="https://extensionpay.com">extensionpay.com</a> and <a href="https://stripe.com/privacy">stripe.com/privacy</a>.</li>
     </ul>
-    <p>We do not use analytics providers (no Google Analytics, no Firebase, no Mixpanel), advertising networks, or tracking pixels. We do not sell, rent, or share any data with third parties for any purpose.</p>
+    <p>The AuditFocus extension itself uses no analytics providers (no Google Analytics, no Firebase, no Mixpanel), advertising networks, or tracking pixels. We do not sell, rent, or share any data with third parties for any purpose. For information about the separate, privacy-preserving analytics used on the auditfocus.app marketing website, see Section 10 below.</p>
 
     <h2>6. Children's Privacy</h2>
     <p>AuditFocus is not directed at children under 13. We do not knowingly collect data from children. If you believe a child has used the extension in a way that raises concern, please contact us.</p>
@@ -220,10 +220,24 @@
     <h2>9. Open Source Attribution</h2>
     <p>AuditFocus is powered by <a href="https://github.com/dequelabs/axe-core">axe-core</a>, an open-source accessibility testing engine developed by Deque Systems and licensed under the Mozilla Public License 2.0 (MPL 2.0). Attribution is preserved in every generated report, including when the Agency white-label setting is enabled.</p>
 
-    <h2>10. Policy Changes</h2>
+    <h2>10. Website Analytics (auditfocus.app)</h2>
+    <p>The marketing website at <code>auditfocus.app</code>, which hosts this Privacy Policy and the setup and installation pages, uses <strong>Vercel Web Analytics</strong> to measure aggregate traffic. This is a separate system from the extension, and no data from inside the extension is ever sent to it.</p>
+    <p>Vercel Web Analytics is designed to be privacy-preserving. Specifically, it:</p>
+    <ul>
+      <li>Does not set cookies or use any other client-side persistent identifiers.</li>
+      <li>Does not fingerprint your device or browser.</li>
+      <li>Does not track you across other sites.</li>
+      <li>Hashes visitor IP addresses with a daily-rotated salt so that individual visitors cannot be re-identified, and discards the raw IP.</li>
+      <li>Collects only page URL, referrer, country (derived at request time), and user-agent category (mobile vs. desktop).</li>
+    </ul>
+    <p>This data is used solely to understand which pages are read most often and where visitors are arriving from, so we can invest in the right documentation. Because no cookies or personal identifiers are set, no consent banner is required under GDPR, ePrivacy, or CCPA. More details are available in Vercel's <a href="https://vercel.com/docs/analytics/privacy-policy">Web Analytics privacy documentation</a>.</p>
+    <p>If you prefer to opt out, standard Do-Not-Track and ad-blocker rules will block the analytics script, and the site remains fully functional.</p>
+    <p><strong>To be clear: the AuditFocus extension itself uses no analytics at all. Section 2 above describes the extension's zero-collection design, and Section 10 only applies to visits to the marketing website.</strong></p>
+
+    <h2>11. Policy Changes</h2>
     <p>We may update this Privacy Policy as the extension evolves. Changes will be posted at this URL and reflected by the Effective Date above. Material changes will also be noted in the extension's release notes on the Chrome Web Store.</p>
 
-    <h2>11. Contact</h2>
+    <h2>12. Contact</h2>
     <p>For questions about this Privacy Policy or AuditFocus, please contact: <strong><a href="mailto:dev@loopheadlabs.com">dev@loopheadlabs.com</a></strong></p>
   </article>
 </div>
