@@ -1,15 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MKSYKFC45Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-MKSYKFC45Z');
-  </script>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy Policy | AuditFocus</title>
@@ -230,21 +221,17 @@
     <p>AuditFocus is powered by <a href="https://github.com/dequelabs/axe-core">axe-core</a>, an open-source accessibility testing engine developed by Deque Systems and licensed under the Mozilla Public License 2.0 (MPL 2.0). Attribution is preserved in every generated report, including when the Agency white-label setting is enabled.</p>
 
     <h2>10. Website Analytics (auditfocus.app)</h2>
-    <p>The marketing website at <code>auditfocus.app</code>, which hosts this Privacy Policy and the setup and installation pages, uses <strong>Google Analytics 4</strong> to measure aggregate traffic. This is a separate system from the extension, and no data from inside the extension is ever sent to it.</p>
-    <p>Google Analytics sets first-party cookies (<code>_ga</code> and <code>_ga_MKSYKFC45Z</code>) in your browser to recognize returning visits and aggregate pageview counts. Data collected includes:</p>
+    <p>The marketing website at <code>auditfocus.app</code>, which hosts this Privacy Policy and the setup and installation pages, uses <strong>Vercel Web Analytics</strong> to measure aggregate traffic. This is a separate system from the extension, and no data from inside the extension is ever sent to it.</p>
+    <p>Vercel Web Analytics is designed to be privacy-preserving. Specifically, it:</p>
     <ul>
-      <li>Pages visited, referrer, session duration, and approximate time on page.</li>
-      <li>Device category (desktop, mobile, tablet), browser, operating system, and screen resolution.</li>
-      <li>Approximate geographic location derived from IP address. Google anonymizes IP addresses by default in Google Analytics 4 and does not expose raw IPs to site operators.</li>
+      <li>Does not set cookies or use any other client-side persistent identifiers.</li>
+      <li>Does not fingerprint your device or browser.</li>
+      <li>Does not track you across other sites.</li>
+      <li>Hashes visitor IP addresses with a daily-rotated salt so that individual visitors cannot be re-identified, and discards the raw IP.</li>
+      <li>Collects only page URL, referrer, country (derived at request time), and user-agent category (mobile vs. desktop).</li>
     </ul>
-    <p>This data is used solely to understand which pages are read most often and where visitors are arriving from, so we can invest in the right documentation. Google acts as the data processor, and their handling is governed by the <a href="https://policies.google.com/privacy">Google Privacy Policy</a> and the <a href="https://support.google.com/analytics/answer/6004245">Google Analytics privacy documentation</a>.</p>
-    <p>To opt out, you can use any of the following:</p>
-    <ul>
-      <li>Install the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-out Browser Add-on</a>.</li>
-      <li>Use any standard ad-blocker or privacy extension that blocks Google Analytics.</li>
-      <li>Clear your cookies for <code>auditfocus.app</code> at any time.</li>
-    </ul>
-    <p>Visitors from jurisdictions with stricter cookie rules (such as the EU, UK, or California under CCPA) can use any of the opt-out methods above to block analytics before any cookies are set.</p>
+    <p>This data is used solely to understand which pages are read most often and where visitors are arriving from, so we can invest in the right documentation. Because no cookies or personal identifiers are set, no consent banner is required under GDPR, ePrivacy, or CCPA. More details are available in Vercel's <a href="https://vercel.com/docs/analytics/privacy-policy">Web Analytics privacy documentation</a>.</p>
+    <p>If you prefer to opt out, standard Do-Not-Track and ad-blocker rules will block the analytics script, and the site remains fully functional.</p>
     <p><strong>To be clear: the AuditFocus extension itself uses no analytics at all. Section 2 above describes the extension's zero-collection design, and Section 10 only applies to visits to the marketing website.</strong></p>
 
     <h2>11. Policy Changes</h2>
@@ -258,6 +245,9 @@
 <footer>
   © 2026 Loophead Labs LLC &nbsp;·&nbsp; <a href="/">auditfocus.app</a>
 </footer>
+
+<!-- Vercel Web Analytics (privacy-friendly, no cookies) -->
+<script defer src="/assets/analytics.js"></script>
 
 </body>
 </html>
